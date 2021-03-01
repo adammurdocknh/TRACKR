@@ -6,7 +6,7 @@
     Author:  Adam Murdoc
 
   =============================================================================
-*
+*/
 
 #pragma once
 #include "ATanDistortion.h

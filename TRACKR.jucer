@@ -4,6 +4,18 @@
               addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1">
   <MAINGROUP id="BwW0fU" name="TRACKR">
     <GROUP id="{066738E3-083B-EC8B-8E9A-A78EFCD836BD}" name="Source">
+      <GROUP id="{7535CE7A-DBB0-FB4B-CF90-85E9E26F01EF}" name="components">
+        <FILE id="Zmu9D6" name="ATanDistortion.cpp" compile="1" resource="0"
+              file="Source/components/ATanDistortion.cpp"/>
+        <FILE id="FKjG9J" name="ATanDistortion.h" compile="0" resource="0"
+              file="Source/components/ATanDistortion.h"/>
+        <FILE id="plFN3t" name="expoDistortion.cpp" compile="1" resource="0"
+              file="Source/components/expoDistortion.cpp"/>
+        <FILE id="efElTc" name="expoDistortion.h" compile="0" resource="0"
+              file="Source/components/expoDistortion.h"/>
+        <FILE id="EWWI4k" name="Preamp.cpp" compile="1" resource="0" file="Source/components/Preamp.cpp"/>
+        <FILE id="meN4wJ" name="Preamp.h" compile="0" resource="0" file="Source/components/Preamp.h"/>
+      </GROUP>
       <FILE id="JcChBm" name="PluginProcessor.cpp" compile="1" resource="0"
             file="Source/PluginProcessor.cpp"/>
       <FILE id="M7Icqb" name="PluginProcessor.h" compile="0" resource="0"
