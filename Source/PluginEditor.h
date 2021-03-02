@@ -23,7 +23,7 @@ public:
     //==============================================================================
     void paint (juce::Graphics&) override;
     void resized() override;
-    juce::Drawable* background();
+    juce::Image backgroundImage();
 
 private:
     // This reference is provided as a quick way for your editor to

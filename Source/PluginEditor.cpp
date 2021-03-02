@@ -29,6 +29,7 @@ void TRACKRAudioProcessorEditor::paint (juce::Graphics& g)
     g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
     g.setColour (juce::Colours::white);
     g.setFont (15.0f);
+    g.setTiledImageFill(<#const Image &imageToUse#>, <#int anchorX#>, <#int anchorY#>, <#float opacity#>)
     g.drawFittedText ("Hello World!", getLocalBounds(), juce::Justification::centred, 1);
     
 }
