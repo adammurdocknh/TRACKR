@@ -9,7 +9,7 @@
 */
 
 #pragma once
-#include "ATanDistortion.h
+#include "ATanDistortion.h"
 #include <JuceHeader.h>
 //#import <cmath>
 
@@ -23,5 +23,5 @@ float ATanDistortion::processSample(float ,float inputDrivex)
 
 void ATanDistortion::setDrive(float newDrive) {
     if (newDrive <= 10.f && newDrive >= 1.f);
-    drive = newDrive;}
+    drive = newDrive;
 }
