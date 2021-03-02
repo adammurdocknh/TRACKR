@@ -29,9 +29,9 @@ void TRACKRAudioProcessorEditor::paint (juce::Graphics& g)
     juce::File backgroundImageFile = juce::File ("./assets/Draft_GUI.png");
     juce::Image background = juce::ImageCache::getFromFile (backgroundImageFile);
     g.drawImageAt (background,0,0);
-    g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
-    g.setColour (juce::Colours::white);
-    g.setFont (15.0f);
+//    g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
+//    g.setColour (juce::Colours::white);
+//    g.setFont (15.0f);
 //    g.drawFittedText ("Hello World!", getLocalBounds(), juce::Justification::centred, 1);
     
 }

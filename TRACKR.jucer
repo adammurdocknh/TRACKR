@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <JUCERPROJECT id="Abpapz" name="TRACKR" projectType="audioplug" useAppConfig="0"
-              addUsingNamespaceToJuceHeader="0" jucerFormatVersion="1" pluginFormats="buildAU"
+              addUsingNamespaceToJuceHeader="0" jucerFormatVersion="1" pluginFormats="buildAAX,buildAU,buildVST3"
               displaySplashScreen="1">
   <MAINGROUP id="BwW0fU" name="TRACKR">
     <GROUP id="{066738E3-083B-EC8B-8E9A-A78EFCD836BD}" name="Source">

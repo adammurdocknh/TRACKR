@@ -9,6 +9,8 @@
 */
 
 #pragma once
+#include <JuceHeader.h>
+
 
 
 class ATanDistortion {

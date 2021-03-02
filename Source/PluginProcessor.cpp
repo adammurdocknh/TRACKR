@@ -206,7 +206,7 @@ juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 
 
 
-int getSign (float signal) {
+float TRACKRAudioProcessor::getSign (float signal) {
     if (signal < 0) {
         return -1;
     }
