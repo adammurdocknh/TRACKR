@@ -1,19 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <JUCERPROJECT id="Abpapz" name="TRACKR" projectType="audioplug" useAppConfig="0"
-              addUsingNamespaceToJuceHeader="0" jucerFormatVersion="1" pluginFormats="buildAAX,buildAU,buildVST3"
-              displaySplashScreen="1">
+              addUsingNamespaceToJuceHeader="0" jucerFormatVersion="1" pluginFormats="buildAU,buildVST3"
+              displaySplashScreen="1" pluginAUIsSandboxSafe="1" pluginManufacturer="Sentience Coding">
   <MAINGROUP id="BwW0fU" name="TRACKR">
     <GROUP id="{066738E3-083B-EC8B-8E9A-A78EFCD836BD}" name="Source">
       <GROUP id="{8BF0FF0F-3A66-9E68-31BB-310C09A1CF9E}" name="assets">
-        <FILE id="tZWFXK" name="Draft_GUI.png" compile="0" resource="1" file="Source/assets/Draft_GUI.png"/>
-        <FILE id="nWxG2T" name="Draft_GUI_SVG.svg" compile="0" resource="1"
+        <FILE id="pju7Ly" name="DraftGUIWithKnobs.png" compile="0" resource="1"
+              file="Source/assets/DraftGUIWithKnobs.png"/>
+        <FILE id="FKqqJB" name="Draft_GUI_SVG.svg" compile="0" resource="1"
               file="Source/assets/Draft_GUI_SVG.svg"/>
-        <FILE id="LHOB9q" name="TRACKR_GUI.afdesign" compile="0" resource="1"
-              file="Source/assets/TRACKR_GUI.afdesign"/>
+        <FILE id="IAIP7e" name="DraftGUI.png" compile="0" resource="1" file="Source/assets/DraftGUI.png"/>
       </GROUP>
-      <FILE id="EWWI4k" name="Preamp.cpp" compile="1" resource="0" file="Source/components/Preamp.cpp"/>
-      <FILE id="meN4wJ" name="Preamp.h" compile="0" resource="0" file="Source/components/Preamp.h"/>
+      <GROUP id="{279D9602-98F0-A4E6-AC3B-F63AE5CE9EB0}" name="componenents">
+        <FILE id="db1cm1" name="ATanDistortion.cpp" compile="1" resource="0"
+              file="Source/componenents/ATanDistortion.cpp"/>
+        <FILE id="DgJYgZ" name="ATanDistortion.h" compile="0" resource="0"
+              file="Source/componenents/ATanDistortion.h"/>
+        <FILE id="LDCQAy" name="expoDistortion.cpp" compile="1" resource="0"
+              file="Source/componenents/expoDistortion.cpp"/>
+        <FILE id="gjNlKq" name="expoDistortion.h" compile="0" resource="0"
+              file="Source/componenents/expoDistortion.h"/>
+        <FILE id="FfovSk" name="Preamp.cpp" compile="1" resource="0" file="Source/componenents/Preamp.cpp"/>
+        <FILE id="UenKF5" name="Preamp.h" compile="0" resource="0" file="Source/componenents/Preamp.h"/>
+      </GROUP>
       <FILE id="JcChBm" name="PluginProcessor.cpp" compile="1" resource="0"
             file="Source/PluginProcessor.cpp"/>
       <FILE id="M7Icqb" name="PluginProcessor.h" compile="0" resource="0"

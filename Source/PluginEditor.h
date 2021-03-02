@@ -14,7 +14,7 @@
 //==============================================================================
 /**
 */
-class TRACKRAudioProcessorEditor  : public juce::AudioProcessorEditor
+class TRACKRAudioProcessorEditor  : public juce::AudioProcessorEditor, public juce::Slider::Listener, public juce::Button::Listener
 {
 public:
     TRACKRAudioProcessorEditor (TRACKRAudioProcessor&);
@@ -23,12 +23,24 @@ public:
     //==============================================================================
     void paint (juce::Graphics&) override;
     void resized() override;
-    juce::Image backgroundImage();
+    void sliderValueChanged(juce::Slider * slider) override;
+    
+    
 
 private:
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.
     TRACKRAudioProcessor& audioProcessor;
+//    ImageComponent imageComponent
 
+    juce::Image background();
+    juce::Slider knobPreGain();
+    juce::Slider knobInputGain();
+    juce::Slider knobFilterHP();
+    juce::Slider knobFilterLP();
+    juce::Slider knobFilterMidFreq();
+    juce::Slider knobFilterMidGain();
+    
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (TRACKRAudioProcessorEditor)
+//    BackgroundComponent background;
 };
