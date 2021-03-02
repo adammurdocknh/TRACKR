@@ -1,10 +1,10 @@
 /*
-  ==============================================================================
-
-    This file contains the basic framework code for a JUCE plugin processor.
-
-  ==============================================================================
-*/
+ ==============================================================================
+ 
+ This file contains the basic framework code for a JUCE plugin processor.
+ 
+ ==============================================================================
+ */
 
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
@@ -12,14 +12,14 @@
 //==============================================================================
 TRACKRAudioProcessor::TRACKRAudioProcessor()
 #ifndef JucePlugin_PreferredChannelConfigurations
-     : AudioProcessor (BusesProperties()
-                     #if ! JucePlugin_IsMidiEffect
-                      #if ! JucePlugin_IsSynth
-                       .withInput  ("Input",  juce::AudioChannelSet::stereo(), true)
-                      #endif
-                       .withOutput ("Output", juce::AudioChannelSet::stereo(), true)
-                     #endif
-                       )
+: AudioProcessor (BusesProperties()
+#if ! JucePlugin_IsMidiEffect
+#if ! JucePlugin_IsSynth
+                  .withInput  ("Input",  juce::AudioChannelSet::stereo(), true)
+#endif
+                  .withOutput ("Output", juce::AudioChannelSet::stereo(), true)
+#endif
+                  )
 #endif
 {
 }
@@ -36,29 +36,29 @@ const juce::String TRACKRAudioProcessor::getName() const
 
 bool TRACKRAudioProcessor::acceptsMidi() const
 {
-   #if JucePlugin_WantsMidiInput
+#if JucePlugin_WantsMidiInput
     return true;
-   #else
+#else
     return false;
-   #endif
+#endif
 }
 
 bool TRACKRAudioProcessor::producesMidi() const
 {
-   #if JucePlugin_ProducesMidiOutput
+#if JucePlugin_ProducesMidiOutput
     return true;
-   #else
+#else
     return false;
-   #endif
+#endif
 }
 
 bool TRACKRAudioProcessor::isMidiEffect() const
 {
-   #if JucePlugin_IsMidiEffect
+#if JucePlugin_IsMidiEffect
     return true;
-   #else
+#else
     return false;
-   #endif
+#endif
 }
 
 double TRACKRAudioProcessor::getTailLengthSeconds() const
@@ -69,7 +69,7 @@ double TRACKRAudioProcessor::getTailLengthSeconds() const
 int TRACKRAudioProcessor::getNumPrograms()
 {
     return 1;   // NB: some hosts don't cope very well if you tell them there are 0 programs,
-                // so this should be at least 1, even if you're not really implementing programs.
+    // so this should be at least 1, even if you're not really implementing programs.
 }
 
 int TRACKRAudioProcessor::getCurrentProgram()
@@ -106,26 +106,26 @@ void TRACKRAudioProcessor::releaseResources()
 #ifndef JucePlugin_PreferredChannelConfigurations
 bool TRACKRAudioProcessor::isBusesLayoutSupported (const BusesLayout& layouts) const
 {
-  #if JucePlugin_IsMidiEffect
+#if JucePlugin_IsMidiEffect
     juce::ignoreUnused (layouts);
     return true;
-  #else
+#else
     // This is the place where you check if the layout is supported.
     // In this template code we only support mono or stereo.
     // Some plugin hosts, such as certain GarageBand versions, will only
     // load plugins that support stereo bus layouts.
     if (layouts.getMainOutputChannelSet() != juce::AudioChannelSet::mono()
-     && layouts.getMainOutputChannelSet() != juce::AudioChannelSet::stereo())
+        && layouts.getMainOutputChannelSet() != juce::AudioChannelSet::stereo())
         return false;
-
+    
     // This checks if the input layout matches the output layout
-   #if ! JucePlugin_IsSynth
+#if ! JucePlugin_IsSynth
     if (layouts.getMainOutputChannelSet() != layouts.getMainInputChannelSet())
         return false;
-   #endif
-
+#endif
+    
     return true;
-  #endif
+#endif
 }
 #endif
 
@@ -134,7 +134,7 @@ void TRACKRAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce:
     juce::ScopedNoDenormals noDenormals;
     auto totalNumInputChannels  = getTotalNumInputChannels();
     auto totalNumOutputChannels = getTotalNumOutputChannels();
-
+    
     // In case we have more outputs than inputs, this code clears any output
     // channels that didn't contain input data, (because these aren't
     // guaranteed to be empty - they may contain garbage).
@@ -143,7 +143,7 @@ void TRACKRAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce:
     // this code if your algorithm always overwrites all the output channels.
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
-
+    
     // This is the place where you'd normally do the guts of your plugin's
     // audio processing...
     // Make sure to reset the state if your inner loop is processing
@@ -152,15 +152,15 @@ void TRACKRAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce:
     // interleaved by keeping the same state.
     for (int channel = 0; channel < totalNumInputChannels; ++channel)
     {
-//        auto* channelData = buffer.getWritePointer (channel);
+        //        auto* channelData = buffer.getWritePointer (channel);
         for (int n = 0; n < buffer.getNumSamples(); n++) {
-        float x = buffer.getReadPointer(channel)[n];
+            float x = buffer.getReadPointer(channel)[n];
             expoDistortion(n, 5);
-
-        buffer.getWritePointer(channel)[n] =  x; // -12 dB
-
-        // ..do something to the data...
-   
+            
+            buffer.getWritePointer(channel)[n] =  x; // -12 dB
+            
+            // ..do something to the data...
+            
         }
         
     }
@@ -199,24 +199,23 @@ juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 }
 
 /*
-Checks the sign and changes it to an int value
-instead of boolean. signbit return true if
-is negative. Function returns -1 or 1
+ Checks the sign and changes it to an int value
+ instead of boolean. signbit return true if
+ is negative. Function returns -1 or 1
  */
 
 
 
-float getSign(float signal) {
-    int x = signbit(signal);
-    if(x==true) {
+int getSign (float signal) {
+    if (signal < 0) {
         return -1;
     }
     else {
         return 1;
     }
 }
-    
-float TRACKRAudioProcessor::expoDistortion(float signal, float distValue) {
+
+float TRACKRAudioProcessor::expoDistortion (float signal, float distValue) {
     float output;
     float x;
     float y;
@@ -224,8 +223,8 @@ float TRACKRAudioProcessor::expoDistortion(float signal, float distValue) {
     /* MATLAB code:
     sign(in(n,1)) * (1 - exp(-abs(G*in(n,1))));
      */
-    output = getSign(signal);
-    x = exp(-abs(distValue*signal));
+    output = getSign (signal);
+    x = exp(-abs (distValue*signal));
     y = 1-x;
     output += y;
     return output;
@@ -234,9 +233,9 @@ float TRACKRAudioProcessor::expoDistortion(float signal, float distValue) {
 float TRACKRAudioProcessor::arcTanDistortion (float signal, float alpha) {
     float output;
     /* MATLAB code
-    out(n,1) = (2/pi)*atan(in(n,1)*alpha)
-    */
-    output = (2/M_PI) * atan(signal*alpha);
+     out(n,1) = (2/pi)*atan(in(n,1)*alpha)
+     */
+    output = (2/M_PI) * atan (signal*alpha);
     return output;
     
 }

@@ -53,9 +53,9 @@ public:
     void getStateInformation (juce::MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
 
-    float expoDistortion(float signal, float distValue);
+    float expoDistortion (float signal, float distValue);
     float arcTanDistortion (float signal, float alpha);
-    float getSign(float signal);
+    float getSign (float signal);
     
     float gain = 1.f;
     

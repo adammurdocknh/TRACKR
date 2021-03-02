@@ -1,20 +1,19 @@
 /*
   =============================================================================
 
-    ATanDistortion.
+    ATanDistortion.h
     Created: 6 Feb 2021 9:52:06p
-    Author:  Adam Murdoc
+    Author:  Adam Murdock
 
   =============================================================================
 */
 
 #pragma once
-#inclue <JuceHeader.h>
 
 
 class ATanDistortion {
 public:
-    float processSample(float , float inputDrivex);
+    float processSample(float sample, float inputDrive);
     
     void setDrive(float newDrive);
 private:
