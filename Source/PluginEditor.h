@@ -14,7 +14,7 @@
 //==============================================================================
 /**
 */
-class TRACKRAudioProcessorEditor  : public juce::AudioProcessorEditor, public juce::Slider::Listener, public juce::Button::Listener
+class TRACKRAudioProcessorEditor  : public juce::AudioProcessorEditor
 {
 public:
     TRACKRAudioProcessorEditor (TRACKRAudioProcessor&);
@@ -23,7 +23,6 @@ public:
     //==============================================================================
     void paint (juce::Graphics&) override;
     void resized() override;
-    void sliderValueChanged(juce::Slider * slider) override;
     
     
 
@@ -33,13 +32,13 @@ private:
     TRACKRAudioProcessor& audioProcessor;
 //    ImageComponent imageComponent
 
-    juce::Image background();
-    juce::Slider knobPreGain();
-    juce::Slider knobInputGain();
-    juce::Slider knobFilterHP();
-    juce::Slider knobFilterLP();
-    juce::Slider knobFilterMidFreq();
-    juce::Slider knobFilterMidGain();
+    juce::Image background;
+    juce::Slider knobPreGain;
+    juce::Slider knobInputGain;
+    juce::Slider knobFilterHP;
+    juce::Slider knobFilterLP;
+    juce::Slider knobFilterMidFreq;
+    juce::Slider knobFilterMidGain;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (TRACKRAudioProcessorEditor)
 //    BackgroundComponent background;

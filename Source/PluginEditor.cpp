@@ -18,11 +18,12 @@ TRACKRAudioProcessorEditor::TRACKRAudioProcessorEditor (TRACKRAudioProcessor& p)
     // editor's size to whatever you need it to be.
     setSize (700, 550);
     
-    knobPreGain().addListener(this);
-    knobPreGain().setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
-    knobPreGain().setBounds,87.5f,197.5f,75,75);
-    knobPreGain().setTextBoxStyle(juce::Slider::TextBoxAbove,false,75,25);
-    addAndMakeVisible(knobPreGain())
+//    knobPreGain.addListener(this);
+    knobPreGain.setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
+    knobPreGain.setBounds(88, 175, 125, 125);
+    knobPreGain.setRange(0.f, 10.f,.01f);
+    knobPreGain.setTextBoxStyle(juce::Slider::TextBoxAbove, false, 50, 25);
+    addAndMakeVisible(knobPreGain);
     
 //    gainSlider.addListener(this); // listen to user interaction with this GUI window
 //    gainSlider.setSliderStyle(Slider::RotaryHorizontalVerticalDrag); // Circular knob
