@@ -19,29 +19,74 @@ TRACKRAudioProcessorEditor::TRACKRAudioProcessorEditor (TRACKRAudioProcessor& p)
     setSize (700, 550);
     
 //    knobPreGain.addListener(this);
+    // Pre amp section
     knobPreGain.setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
-    knobPreGain.setBounds(88, 175, 125, 125);
+    knobPreGain.setBounds(75, 185, 100, 100);
     knobPreGain.setRange(0.f, 10.f,.01f);
-    knobPreGain.setTextBoxStyle(juce::Slider::TextBoxAbove, false, 50, 25);
+    knobPreGain.setTextBoxStyle(juce::Slider::NoTextBox, false, 0, 0);
+//    knobPreGain.setValue(5.f);
     addAndMakeVisible(knobPreGain);
     
-//    gainSlider.addListener(this); // listen to user interaction with this GUI window
-//    gainSlider.setSliderStyle(Slider::RotaryHorizontalVerticalDrag); // Circular knob
-//    gainSlider.setBounds(40,90,120,120); // position on GUI
-//    gainSlider.setRange(0.f,4.f,.01f);
-//    gainSlider.setSkewFactorFromMidPoint(1.f);
-//    gainSlider.setTextBoxStyle(Slider::TextBoxBelow, false, 60, 30);
-//    gainSlider.setValue(audioProcessor.gain);
-//    addAndMakeVisible(gainSlider);
-//    auto background = juce::ImageCache::getFromMemory(BinaryData::DraftGUI_png, BinaryData::DraftGUI_pngSize);
-//
-//    if (! background.isNull() ) {
-//        imageComponent.setImage(background,juce::RectanglePlacement::stretchToFit);
-//    }
-//    else {
-//        jassert (! background.isNull());
-//    }
-//    addAndMakeVisible(imageComponent);
+    knobInputGain.setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
+    knobInputGain.setBounds(75, 330, 100, 100);
+    knobInputGain.setRange(0.f, 10.f,.01f);
+    knobInputGain.setTextBoxStyle(juce::Slider::NoTextBox, false, 0, 0);
+//    knobInputGain.setValue(5.f);
+    addAndMakeVisible(knobInputGain);
+    
+    
+    // EQ section
+    knobFilterHP.setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
+    knobFilterHP.setBounds(257, 190, 75, 75);
+    knobFilterHP.setRange(0.f, 10.f,.01f);
+    knobFilterHP.setTextBoxStyle(juce::Slider::NoTextBox, false, 0, 0);
+//    knobFilterHP.setValue(5.f);
+    addAndMakeVisible(knobFilterHP);
+    
+    knobFilterLP.setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
+    knobFilterLP.setBounds(368, 190, 75, 75);
+    knobFilterLP.setRange(0.f, 10.f,.01f);
+    knobFilterLP.setTextBoxStyle(juce::Slider::NoTextBox, false, 0, 0);
+//    knobFilterLP.setValue(5.f);
+    addAndMakeVisible(knobFilterLP);
+
+    knobFilterMidFreq.setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
+    knobFilterMidFreq.setBounds(312, 265, 75, 75);
+    knobFilterMidFreq.setRange(0.f, 10.f);
+    knobFilterMidFreq.setTextBoxStyle(juce::Slider::NoTextBox, false, 0, 0);
+//    knobFilterMidFreq.setValue(5.f);
+    addAndMakeVisible(knobFilterMidFreq);
+    
+    knobFilterMidGain.setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
+    knobFilterMidGain.setBounds(312, 385, 75, 75);
+    knobFilterMidGain.setRange(0.f, 10.f,.01f);
+    knobFilterMidGain.setTextBoxStyle(juce::Slider::NoTextBox, false, 0, 0);
+//    knobFilterMidGain.setValue(5.f);
+    addAndMakeVisible(knobFilterMidGain);
+    
+    
+    // Tape Section
+    knobBias.setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
+    knobBias.setBounds(482, 190, 75, 75);
+    knobBias.setRange(0.f, 10.f);
+    knobBias.setTextBoxStyle(juce::Slider::NoTextBox, false, 0, 0);
+//    knobBias.setValue(5.f);
+    addAndMakeVisible(knobBias);
+    
+    knobOutput.setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
+    knobOutput.setBounds(592, 190, 75, 75);
+    knobOutput.setRange(0.f, 10.f);
+    knobOutput.setTextBoxStyle(juce::Slider::NoTextBox, false, 0, 0);
+//    knobOutput.setValue(5.f);
+    addAndMakeVisible(knobOutput);
+    
+    addAndMakeVisible(tapeFormulas);
+    tapeFormulas.setBounds(530, 390, 100, 25);
+    tapeFormulas.addItem("#1", 1);
+    tapeFormulas.addItem("#2", 2);
+    
+    
+    
 }
 
 TRACKRAudioProcessorEditor::~TRACKRAudioProcessorEditor()
@@ -56,7 +101,7 @@ void TRACKRAudioProcessorEditor::paint (juce::Graphics& g)
 //    g.setColour (juce::Colours::white);
 //    g.setFont (15.0f);
 //    g.drawFittedText ("Hello World!", getLocalBounds(), juce::Justification::centred, 1);
-    auto background = juce::ImageCache::getFromMemory(BinaryData::DraftGUIWithKnobs_png, BinaryData::DraftGUIWithKnobs_pngSize);
+    auto background = juce::ImageCache::getFromMemory(BinaryData::DraftGUIWoKnobs_png, BinaryData::DraftGUIWoKnobs_pngSize);
     g.drawImageAt(background, 0, 0);
 //    g.draw
     
