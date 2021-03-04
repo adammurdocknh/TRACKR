@@ -57,7 +57,14 @@ public:
     float arcTanDistortion (float signal, float alpha);
     float getSign (float signal);
     
-    float gain = 1.f;
+    float preGain = 0.f;
+    float inputGain = 0.f;
+    float filterHP = 10.f;
+    float filterLP = 21000.f;
+    float filterMidFreq = 1000.f;
+    float filterMidGain = 0.f;
+    float bias = 0.f;
+    float output = 0.f;
     
 private:
     //==============================================================================
