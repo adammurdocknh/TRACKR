@@ -9,6 +9,9 @@
 #pragma once
 
 #include <JuceHeader.h>
+#include "components/Biquad.h"
+#include "components/Filter.h"
+#include "components/Preamp.h"
 
 //==============================================================================
 /**
@@ -56,6 +59,8 @@ public:
     float expoDistortion (float signal, float distValue);
     float arcTanDistortion (float signal, float alpha);
     float getSign (float signal);
+	
+	Preamp preamp;
     
     float preGain = 0.f;
     float inputGain = 0.f;
@@ -69,4 +74,4 @@ public:
 private:
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (TRACKRAudioProcessor)
-};
+ };

@@ -23,9 +23,10 @@ TRACKRAudioProcessorEditor::TRACKRAudioProcessorEditor (TRACKRAudioProcessor& p)
     knobPreGain.addListener(this);
     knobPreGain.setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
     knobPreGain.setBounds(75, 185, 100, 100);
-    knobPreGain.setRange(0.f, 10.f,.01f);
+    knobPreGain.setRange(-12.f, 12.f,.01f);
     knobPreGain.setTextBoxStyle(juce::Slider::NoTextBox, false, 0, 0);
 //    knobPreGain.setValue(5.f);
+	knobPreGain.setValue(0.0);
     addAndMakeVisible(knobPreGain);
     
     knobInputGain.addListener(this); knobInputGain.setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
