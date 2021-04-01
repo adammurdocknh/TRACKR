@@ -60,7 +60,8 @@ public:
     float arcTanDistortion (float signal, float alpha);
     float getSign (float signal);
 	
-	Preamp preamp;
+	Preamp preampSection;
+	Filter filterSection;
     
     float preGain = 0.f;
     float inputGain = 0.f;

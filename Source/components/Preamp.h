@@ -21,13 +21,10 @@ public:
 	
 	void processSignal(float *signal, const int numSamples, const int channel);
 	float processSample(float input);
-	float atandist(float sample);
-	void setDrive(float newDrive);
-	void setInput(float newGain);
-	
+	float processSample(float input, float gain, float drive);
+	float atandist(float sample, float drive);
+
 private:
-	
+
 	float Fs = 48000.f;
-	float drive = 0.0f;
-	float inputVolume;
 };

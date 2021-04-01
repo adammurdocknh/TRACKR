@@ -147,14 +147,13 @@ void TRACKRAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce:
     
     for (int channel = 0; channel < totalNumInputChannels; ++channel)
     {
-        //        auto* channelData = buffer.getWritePointer (channel);
         for (int n = 0; n < buffer.getNumSamples(); n++) {
             float x = buffer.getReadPointer(channel)[n];
-//            expoDistortion(n, preGain);
-			x = preamp.processSample(x);
+			// Preamp Module
+			x = preampSection.processSample(x, inputGain, preGain);
+			x = filterSection.processSample(x, channel, filterLP, filterHP, filterMidFreq, filterMidGain);
+//			x = filterSection.processSample(
             buffer.getWritePointer(channel)[n] =  x; // -12 dB
-            
-            
         }
         
     }

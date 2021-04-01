@@ -25,11 +25,11 @@ TRACKRAudioProcessorEditor::TRACKRAudioProcessorEditor (TRACKRAudioProcessor& p)
     knobPreGain.setBounds(75, 185, 100, 100);
     knobPreGain.setRange(-12.f, 12.f,.01f);
     knobPreGain.setTextBoxStyle(juce::Slider::NoTextBox, false, 0, 0);
-//    knobPreGain.setValue(5.f);
 	knobPreGain.setValue(0.0);
     addAndMakeVisible(knobPreGain);
     
-    knobInputGain.addListener(this); knobInputGain.setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
+    knobInputGain.addListener(this);
+	knobInputGain.setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
     knobInputGain.setBounds(75, 330, 100, 100);
     knobInputGain.setRange(-12.f, 12.f,.01f);
     knobInputGain.setTextBoxStyle(juce::Slider::NoTextBox, false, 0, 0);
@@ -41,27 +41,30 @@ TRACKRAudioProcessorEditor::TRACKRAudioProcessorEditor (TRACKRAudioProcessor& p)
     knobFilterHP.addListener(this);
     knobFilterHP.setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
     knobFilterHP.setBounds(257, 190, 75, 75);
-    knobFilterHP.setRange(10.f, 350.f,.01f);
+    knobFilterHP.setRange(10.f, 1000.f,.01f);
     knobFilterHP.setTextBoxStyle(juce::Slider::NoTextBox, false, 0, 0);
     knobFilterHP.setValue(10.f);
     addAndMakeVisible(knobFilterHP);
     
    
-    knobFilterLP.addListener(this); knobFilterLP.setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
+    knobFilterLP.addListener(this);
+	knobFilterLP.setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
     knobFilterLP.setBounds(368, 190, 75, 75);
-    knobFilterLP.setRange(3000.f, 21000.f,.01f);
+    knobFilterLP.setRange(1000.f, 21000.f,.01f);
     knobFilterLP.setTextBoxStyle(juce::Slider::NoTextBox, false, 0, 0);
     knobFilterLP.setValue(21000.f);
     addAndMakeVisible(knobFilterLP);
 
-    knobFilterMidFreq.addListener(this); knobFilterMidFreq.setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
+    knobFilterMidFreq.addListener(this);
+	knobFilterMidFreq.setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
     knobFilterMidFreq.setBounds(312, 265, 75, 75);
     knobFilterMidFreq.setRange(500.f, 2000.f);
     knobFilterMidFreq.setTextBoxStyle(juce::Slider::NoTextBox, false, 0, 0);
     knobFilterMidFreq.setValue(1000.f);
     addAndMakeVisible(knobFilterMidFreq);
     
-    knobFilterMidGain.addListener(this); knobFilterMidGain.setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
+    knobFilterMidGain.addListener(this);
+	knobFilterMidGain.setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
     knobFilterMidGain.setBounds(312, 385, 75, 75);
     knobFilterMidGain.setRange(-12.f, 12.f,.01f);
     knobFilterMidGain.setTextBoxStyle(juce::Slider::NoTextBox, false, 0, 0);
@@ -86,11 +89,11 @@ TRACKRAudioProcessorEditor::TRACKRAudioProcessorEditor (TRACKRAudioProcessor& p)
     addAndMakeVisible(knobOutput);
     
     // @TODO Flesh out the logic case for each component.
-    tapeFormulas.addListener(this);
-    tapeFormulas.setBounds(530, 390, 100, 25);
-    tapeFormulas.addItem("#1", 1);
-    tapeFormulas.addItem("#2", 2);
-    addAndMakeVisible(tapeFormulas);
+//    tapeFormulas.addListener(this);
+//    tapeFormulas.setBounds(530, 390, 100, 25);
+//    tapeFormulas.addItem("#1", 1);
+//    tapeFormulas.addItem("#2", 2);
+//    addAndMakeVisible(tapeFormulas);
     
     
     
@@ -151,8 +154,8 @@ void TRACKRAudioProcessorEditor::sliderValueChanged(juce::Slider * slider) {
 }
 
 // @TODO will come back to once tape formulas are worked out.
-//void TRACKRAudioProcessorEditor::comboBoxChanged(juce::ComboBox *comboBox) {
-//    if (comboBox == &tapeFormulas) {
-//
-//    }
-//}
+void TRACKRAudioProcessorEditor::comboBoxChanged(juce::ComboBox *comboBox) {
+    if (comboBox == &tapeFormulas) {
+
+    }
+}
