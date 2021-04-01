@@ -38,8 +38,8 @@ private:
     juce::Image background;
     juce::Slider knobPreGain;
     juce::Slider knobInputGain;
-    juce::Slider knobFilterHP;
-    juce::Slider knobFilterLP;
+    juce::Slider knobLowGain;
+    juce::Slider knobHighGain;
     juce::Slider knobFilterMidFreq;
     juce::Slider knobFilterMidGain;
     juce::Slider knobBias;
