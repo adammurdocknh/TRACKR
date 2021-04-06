@@ -148,15 +148,13 @@ void TRACKRAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce:
     for (int channel = 0; channel < totalNumInputChannels; ++channel)
     {
         for (int n = 0; n < buffer.getNumSamples(); n++) {
-            float x = buffer.getReadPointer(channel)[n];
+            float input = buffer.getReadPointer(channel)[n];
 			// Preamp Module
-			x = preampSection.processSample(x, inputGain, preGain);
-			float y = filterSection.processSample(x, channel, lowGain, highGain, filterMidFreq, filterMidGain);
-//			output = Decibels::decibelsToGain(output);
-			float z = y * Decibels::decibelsToGain(output);
-//			x *= output;
-//			x = filterSection.processSample(
-            buffer.getWritePointer(channel)[n] =  z; // -12 dB
+			input = preampSection.processSample(input, inputGain, preGain,channel);
+			input = filterSection.processSample(input, channel, lowGain, highGain, filterMidFreq, filterMidGain);
+			
+			float output = tapeSection.processSample(input, outputGain, channel);
+            buffer.getWritePointer(channel)[n] =  output; // -12 dB
         }
         
     }
@@ -194,43 +192,3 @@ juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter()
     return new TRACKRAudioProcessor();
 }
 
-/*
- Checks the sign and changes it to an int value
- instead of boolean. signbit return true if
- is negative. Function returns -1 or 1
- */
-
-
-
-float TRACKRAudioProcessor::getSign (float signal) {
-    if (signal < 0) {
-        return -1;
-    }
-    else {
-        return 1;
-    }
-}
-
-float TRACKRAudioProcessor::expoDistortion (float signal, float distValue) {
-    float output;
-    float x;
-    float y;
-
-    /* MATLAB code:
-    sign(in(n,1)) * (1 - exp(-abs(G*in(n,1))));
-     */
-    output = getSign (signal);
-    x = exp(-abs (distValue*signal));
-    y = 1-x;
-    output += y;
-    return output;
-    }
-
-float TRACKRAudioProcessor::arcTanDistortion (float signal, float alpha) {
-    float output;
-    /* MATLAB code
-     out(n,1) = (2/pi)*atan(in(n,1)*alpha)
-     */
-    output = (2/M_PI) * atan (signal*alpha);
-    return output;
-}

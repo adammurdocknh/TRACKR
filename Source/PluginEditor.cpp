@@ -85,22 +85,13 @@ TRACKRAudioProcessorEditor::TRACKRAudioProcessorEditor (TRACKRAudioProcessor& p)
     knobBias.setValue(0.f);
     addAndMakeVisible(knobBias);
     
-    knobOutput.addListener(this); knobOutput.setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
+    knobOutput.addListener(this);
+	knobOutput.setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
     knobOutput.setBounds(592, 190, 75, 75);
-    knobOutput.setRange(-12.f, 12.f);
+    knobOutput.setRange(-12.f, 12.f,.01f);
     knobOutput.setTextBoxStyle(juce::Slider::NoTextBox, false, 0, 0);
     knobOutput.setValue(0.f);
     addAndMakeVisible(knobOutput);
-    
-    // @TODO Flesh out the logic case for each component.
-//    tapeFormulas.addListener(this);
-//    tapeFormulas.setBounds(530, 390, 100, 25);
-//    tapeFormulas.addItem("#1", 1);
-//    tapeFormulas.addItem("#2", 2);
-//    addAndMakeVisible(tapeFormulas);
-    
-    
-    
 }
 
 TRACKRAudioProcessorEditor::~TRACKRAudioProcessorEditor()
@@ -156,7 +147,7 @@ void TRACKRAudioProcessorEditor::sliderValueChanged(juce::Slider * slider) {
         audioProcessor.bias = knobBias.getValue();
     }
 	if (slider == &knobOutput) {
-		audioProcessor.output = knobOutput.getValue();
+		audioProcessor.outputGain = knobOutput.getValue();
 	}
 }
 

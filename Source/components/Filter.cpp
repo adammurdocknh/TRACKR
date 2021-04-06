@@ -12,14 +12,14 @@
 
 Filter::Filter(){}
 
-void Filter::processSignal(float *signal, const int numSamples, const int channel) {
-	for(int n =0; n < numSamples; n++) {
-		float x = signal[n];
-		x = lowPassFilter.processSample(x, channel);
-		x = highPassFilter.processSample(x, channel);
-		signal[n] = x;
-	}
-}
+//void Filter::processSignal(float *signal, const int numSamples, const int channel) {
+//	for(int n =0; n < numSamples; n++) {
+//		float x = signal[n];
+//		x = lowPassFilter.processSample(x, channel);
+//		x = highPassFilter.processSample(x, channel);
+//		signal[n] = x;
+//	}
+//}
 
 float Filter::processSample(float input, float channel, double lowGain, double highGain, double midFreq, double midGain) {
 //	float x = input;

@@ -12,6 +12,7 @@
 #include "components/Biquad.h"
 #include "components/Filter.h"
 #include "components/Preamp.h"
+#include "components/TapeOutput.h"
 
 //==============================================================================
 /**
@@ -62,6 +63,7 @@ public:
 	
 	Preamp preampSection;
 	Filter filterSection;
+	TapeOutput tapeSection;
     
     float preGain = 0.f;
     float inputGain = 0.f;
@@ -74,7 +76,7 @@ public:
     float filterMidFreq = 1000.f;
     float filterMidGain = 0.f;
     float bias = 0.f;
-    float output = 0.f;
+    float outputGain = 0.f;
     
 private:
     //==============================================================================
