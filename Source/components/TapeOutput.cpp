@@ -27,6 +27,7 @@ float TapeOutput::processSample(float input, float volume, int channel) {
 	highShelf.setFreq(6000.0);
 	highShelf.setAmpdB(1.0);
 
+	input *= volume;
 	input = hpf.processSample(input, channel);
 	float lowBand = lowShelf.processSample(lowShelf2.processSample(input, channel), channel);
 	float highBand = highShelf.processSample(input, channel);
@@ -35,7 +36,8 @@ float TapeOutput::processSample(float input, float volume, int channel) {
 //		output *= .5;
 	
 	output = distStage->cubicDist(output);
-//		output *= 4.f;
-	return output * volume;
+	output *= 4.f;
+//	output *= juce::Decibels::decibelsToGain(18);
+	return output;
 
 }
