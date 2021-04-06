@@ -22,6 +22,8 @@
         <FILE id="u2kHkG" name="Filter.h" compile="0" resource="0" file="Source/components/Filter.h"/>
         <FILE id="PCMjTk" name="Preamp.cpp" compile="1" resource="0" file="Source/components/Preamp.cpp"/>
         <FILE id="X23YpT" name="Preamp.h" compile="0" resource="0" file="Source/components/Preamp.h"/>
+        <FILE id="xeljkB" name="TapeOutput.cpp" compile="1" resource="0" file="Source/components/TapeOutput.cpp"/>
+        <FILE id="r2ax9w" name="TapeOutput.h" compile="0" resource="0" file="Source/components/TapeOutput.h"/>
       </GROUP>
       <FILE id="JcChBm" name="PluginProcessor.cpp" compile="1" resource="0"
             file="Source/PluginProcessor.cpp"/>

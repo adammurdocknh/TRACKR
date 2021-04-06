@@ -19,24 +19,24 @@ void Preamp::processSignal(float *signal, const int numSamples, const int channe
 	}
 }
 
-float Preamp::processSample(float input, float volume, float drive) {
-	drive = juce::Decibels::decibelsToGain(drive);
-	volume = juce::Decibels::decibelsToGain(volume);
-	if(drive == 0.0) {
-		return input * volume;
-	}
-	else {
-		float output = atandist(input, drive * .5);
-		output = tandist(output, drive * .5);
-		output = atandist(output, drive * .5);
+float Preamp::processSample(float input, float volume, float drive, int channel) {
+
+		drive = juce::Decibels::decibelsToGain(drive);
+		volume = juce::Decibels::decibelsToGain(volume);
+		float output = input * volume;
+		output = atandist(output, drive);
+		output = tandist(output, drive);
 		output = cubicDist(output);
-		return output * volume;
-	}
-	return input;
+		output = atandist(output, drive);
+		output = cubicDist(output);
+		output *= 4.f;
+		return output;
 }
 
 float Preamp::atandist(float sample, float drive) {
-    return (2.f/M_PI) * atan( drive * sample);
+
+		return (2.f/M_PI) * atan( drive * sample);
+
 }
 
 float Preamp::tandist(float sample, float drive) {
