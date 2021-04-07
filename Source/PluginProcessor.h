@@ -65,12 +65,11 @@ public:
 	Filter filterSection;
 	TapeOutput tapeSection;
     
+	
+//	AudioParameterFloat("parameterID", "ParameterName", NormalisableRange<float>, float defaultValue, "ParameterLabel"
+	
     float preGain = 0.f;
     float inputGain = 0.f;
-//    float filterHP = 10.f;
-//    float filterLP = 21000.f;
-//	float lowFreq = 10.f;
-//	float highFreq = 20000.f;
 	float lowGain = 0.0f;
 	float highGain = 0.0f;
     float filterMidFreq = 1000.f;

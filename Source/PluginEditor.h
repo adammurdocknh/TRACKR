@@ -45,6 +45,7 @@ private:
     juce::Slider knobBias;
     juce::Slider knobOutput;
     juce::ComboBox tapeFormulas;
+	
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (TRACKRAudioProcessorEditor)
 //    BackgroundComponent background;

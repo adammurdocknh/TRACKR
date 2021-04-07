@@ -18,26 +18,37 @@ float TapeOutput::processSample(float input, float volume, int channel) {
 	
 	hpf.setFreq(20);
 	
-	lowShelf.setFreq(60.0);
-	lowShelf.setAmpdB(3.0);
+//	lowShelf.setFreq(60.0);
+//	lowShelf.setAmpdB(3.0);
+//
+//	lowShelf2.setFreq(480);
+//	lowShelf2.setAmpdB(-1.0);
 	
-	lowShelf2.setFreq(480);
-	lowShelf2.setAmpdB(-1.0);
+	lowPeak.setFreq(30.f);
+	lowPeak.setAmpdB(2.5f);
 	
-	highShelf.setFreq(6000.0);
-	highShelf.setAmpdB(1.0);
+	highPeak.setFreq(21000.f);
+	highPeak.setAmpdB(6.f);
+	
+	highShelf.setFreq(100.0);
+	highShelf.setAmpdB(3.0);
 
 	input *= volume;
+	
+	
+//	float lowBand = lowShelf.processSample(lowShelf2.processSample(input, channel), channel);
+//	float highBand = highShelf.processSample(input, channel);
+	
 	input = hpf.processSample(input, channel);
-	float lowBand = lowShelf.processSample(lowShelf2.processSample(input, channel), channel);
-	float highBand = highShelf.processSample(input, channel);
+	input = lowPeak.processSample(input, channel);
+	input = highShelf.processSample(input, channel);
+	input = highPeak.processSample(input, channel);
 	
-	float output = lowBand + highBand;
-//		output *= .5;
 	
-	output = distStage->cubicDist(output);
-	output *= 4.f;
-//	output *= juce::Decibels::decibelsToGain(18);
-	return output;
+//	float output = lowBand + highBand;
+	
+	input = distStage->cubicDist(input);
+	input *= 4.f;
+	return input;
 
 }

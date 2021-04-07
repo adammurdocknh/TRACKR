@@ -22,6 +22,7 @@ TRACKRAudioProcessor::TRACKRAudioProcessor()
                   )
 #endif
 {
+//	addParameter(preGain = new AudioParameterFloat::AudioParameterFloat("preGain","preampGain",NormalisableRange::<float>(0.f,, 3.f, .01f, 1.f)));
 }
 
 TRACKRAudioProcessor::~TRACKRAudioProcessor()

@@ -9,12 +9,8 @@
 */
 
 #pragma once
-//#include "ATanDistortion.h"
-//#include "expoDistortion.h"
 #include <JuceHeader.h>
 #include <cmath>
-//#include "expoDistortion.h"
-//#include "ATanDistortion.h"
 
 class Preamp {
 public:
