@@ -68,16 +68,37 @@ public:
 	
 //	AudioParameterFloat("parameterID", "ParameterName", NormalisableRange<float>, float defaultValue, "ParameterLabel"
 	
-    float preGain = 0.f;
-    float inputGain = 0.f;
-	float lowGain = 0.0f;
-	float highGain = 0.0f;
-    float filterMidFreq = 1000.f;
-    float filterMidGain = 0.f;
-    float bias = 0.f;
-    float outputGain = 0.f;
+//    float preGain = 0.f;
+//    float inputGain = 0.f;
+//	float lowGain = 0.0f;
+//	float highGain = 0.0f;
+//    float filterMidFreq = 1000.f;
+//    float filterMidGain = 0.f;
+//    float bias = 0.f;
+//    float outputGain = 0.f;
+	
+	AudioProcessorValueTreeState apvts;
+
     
 private:
     //==============================================================================
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (TRACKRAudioProcessor)
+//    AudioParameterFloat* preGain;
+//	AudioParameterFloat* inputGain;
+//	AudioParameterFloat* lowGain;
+//	AudioParameterFloat* highGain;
+//	AudioParameterFloat* filterMidFreq;
+//	AudioParameterFloat* filterMidGain;
+//	AudioParameterFloat* outputGain;
+	
+	std::atomic<float>* preGainParameter = nullptr;
+	std::atomic<float>* inputGainParameter = nullptr;
+	std::atomic<float>* lowGainParameter = nullptr;
+	std::atomic<float>* highGainParameter = nullptr;
+	std::atomic<float>* filterMidFreqParameter = nullptr;
+	std::atomic<float>* filterMidGainParameter = nullptr;
+	std::atomic<float>* outputGainParameter = nullptr;
+	
+	AudioProcessorValueTreeState::ParameterLayout createParams();
+	
+	JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (TRACKRAudioProcessor)
  };

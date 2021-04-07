@@ -44,5 +44,5 @@ float Preamp::tandist(float sample, float drive) {
 	return tanh(sample * drive);
 }
 float Preamp::cubicDist(float sample) {
-	return (sample - .2 * std::pow(sample, 3));
+	return (sample - .1 * std::pow(sample, 3));
 }

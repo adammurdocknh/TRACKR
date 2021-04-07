@@ -12,17 +12,25 @@
 //==============================================================================
 TRACKRAudioProcessor::TRACKRAudioProcessor()
 #ifndef JucePlugin_PreferredChannelConfigurations
-: AudioProcessor (BusesProperties()
-#if ! JucePlugin_IsMidiEffect
-#if ! JucePlugin_IsSynth
-                  .withInput  ("Input",  juce::AudioChannelSet::stereo(), true)
+	: AudioProcessor (BusesProperties()
+		#if ! JucePlugin_IsMidiEffect
+		#if ! JucePlugin_IsSynth
+		  .withInput  ("Input",  juce::AudioChannelSet::stereo(), true)
+		#endif
+		  .withOutput ("Output", juce::AudioChannelSet::stereo(), true)
+		#endif
+		  ),
+			apvts(*this, nullptr, "Params", createParams())
 #endif
-                  .withOutput ("Output", juce::AudioChannelSet::stereo(), true)
-#endif
-                  )
-#endif
+
 {
-//	addParameter(preGain = new AudioParameterFloat::AudioParameterFloat("preGain","preampGain",NormalisableRange::<float>(0.f,, 3.f, .01f, 1.f)));
+	preGainParameter = apvts.getRawParameterValue("PREGAIN");
+	inputGainParameter = apvts.getRawParameterValue("INPUTGAIN");
+	lowGainParameter = apvts.getRawParameterValue("LOWGAIN");
+	highGainParameter = apvts.getRawParameterValue("HIGHGAIN");
+	filterMidFreqParameter = apvts.getRawParameterValue("FILTERMIDFREQ");
+	filterMidGainParameter = apvts.getRawParameterValue("FILTERMIDGAIN");
+	outputGainParameter = apvts.getRawParameterValue("OUTPUTGAIN");
 }
 
 TRACKRAudioProcessor::~TRACKRAudioProcessor()
@@ -136,6 +144,16 @@ void TRACKRAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce:
     auto totalNumInputChannels  = getTotalNumInputChannels();
     auto totalNumOutputChannels = getTotalNumOutputChannels();
     
+	auto preGain = apvts.getRawParameterValue("PREGAIN")->load();
+	auto inputGain = apvts.getRawParameterValue("INPUTGAIN")->load();
+	auto lowGain = apvts.getRawParameterValue("LOWGAIN")->load();
+	auto highGain = apvts.getRawParameterValue("HIGHGAIN")->load();
+	auto filterMidFreq = apvts.getRawParameterValue("FILTERMIDFREQ")->load();
+	auto filterMidGain = apvts.getRawParameterValue("FILTERMIDGAIN")->load();
+	auto outputGain = apvts.getRawParameterValue("OUTPUTGAIN")->load();
+	
+	
+	
     // In case we have more outputs than inputs, this code clears any output
     // channels that didn't contain input data, (because these aren't
     // guaranteed to be empty - they may contain garbage).
@@ -153,7 +171,7 @@ void TRACKRAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce:
 			// Preamp Module
 			input = preampSection.processSample(input, inputGain, preGain,channel);
 			input = filterSection.processSample(input, channel, lowGain, highGain, filterMidFreq, filterMidGain);
-			
+
 			float output = tapeSection.processSample(input, outputGain, channel);
             buffer.getWritePointer(channel)[n] =  output; // -12 dB
         }
@@ -178,6 +196,8 @@ void TRACKRAudioProcessor::getStateInformation (juce::MemoryBlock& destData)
     // You should use this method to store your parameters in the memory block.
     // You could do that either as raw data, or use the XML or ValueTree classes
     // as intermediaries to make it easy to save and load complex data.
+//	ScopedPointer <XmlElement> xml (
+
 }
 
 void TRACKRAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
@@ -193,3 +213,85 @@ juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter()
     return new TRACKRAudioProcessor();
 }
 
+juce::AudioProcessorValueTreeState::ParameterLayout TRACKRAudioProcessor::createParams() {
+	std::vector<std::unique_ptr<RangedAudioParameter>> params;
+	params.push_back(std::make_unique<AudioParameterFloat>("PREGAIN",
+														  "Pre Gain",
+														  0.0f,
+														  3.0f,
+														  0.f));
+	params.push_back(std::make_unique<AudioParameterFloat>("INPUTGAIN",
+														  "Input Gain",
+														  -12.f,
+														  12.f,
+														   0.f));
+	params.push_back(std::make_unique<AudioParameterFloat>("LOWGAIN",
+														   "Low Gain",
+														   -12.f,
+														   12.f,
+														   0.f));
+	
+	params.push_back(std::make_unique<AudioParameterFloat>("HIGHGAIN",
+														   "High Gain",
+														   -12.f,
+														   12.f,
+														   0.f));
+	params.push_back(std::make_unique<AudioParameterFloat>("FILTERMIDFREQ",
+														   "Filter Mid Frequency",
+														   500.f,
+														   4000.f,
+														   1000.f));
+	params.push_back(std::make_unique<AudioParameterFloat>("FILTERMIDGAIN",
+														   "Filter Mid Gain",
+														   -12.f,
+														   12.f,
+														   0.f));
+	
+	params.push_back(std::make_unique<AudioParameterFloat>("OUTPUTGAIN",
+														   "Output Gain",
+														   -12.f,
+														   12.f,
+														   0.f));
+	
+	return { params.begin(), params.end() };
+	
+//
+//			 : apvts (*this, nullptr, Identifier ("TestTree"), {
+//				 std::make_unique<AudioParameterFloat("preGain",
+//													  "PreGain",
+//													  0.0f,
+//													  3.0f,
+//													  0.f),
+//				 std::make_unique<AudioParameterFloat("inputGain",
+//													  "InputGain",
+//													  -12.f,
+//													  12.f,
+//													  0.f),
+//				 std::make_unique<AudioParameterFloat("lowGain",
+//													  "LowGain",
+//													  -12.f,
+//													  12.f,
+//													  0.f),
+//				 std::make_unique<AudioParameterFloat("highGain",
+//													  "HighGain",
+//													  -12.f,
+//													  12.f,
+//													  0.f),
+//				 std::make_unique<AudioParameterFloat("filterMidFreq",
+//													  "FilterMidFreq",
+//													  500.f,
+//													  4000.f,
+//													  1000.f),
+//				 std::make_unique<AudioParameterFloat("filterMidGain",
+//													  "FilterMidGain",
+//													  -12.f,
+//													  12.f,
+//													  0.f),
+//				 std::make_unique<AudioParameterFloat("outputGain",
+//													  "OutputGain",
+//													  -12.f,
+//													  12.f,
+//													  0.f),
+//
+//			 }
+}
