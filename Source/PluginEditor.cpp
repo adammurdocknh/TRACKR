@@ -18,12 +18,10 @@ TRACKRAudioProcessorEditor::TRACKRAudioProcessorEditor (TRACKRAudioProcessor& p)
     // editor's size to whatever you need it to be.
     setSize (700, 550);
     
-//    knobPreGain.addListener(this);
     // Pre amp section
     knobPreGain.addListener(this);
     knobPreGain.setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
     knobPreGain.setBounds(75, 185, 100, 100);
-//    knobPreGain.setRange(0.f, 3.f,.01f);
     knobPreGain.setTextBoxStyle(juce::Slider::NoTextBox, false, 0, 0);
 	knobPreGain.setValue(0.0);
     addAndMakeVisible(knobPreGain);
@@ -32,7 +30,6 @@ TRACKRAudioProcessorEditor::TRACKRAudioProcessorEditor (TRACKRAudioProcessor& p)
     knobInputGain.addListener(this);
 	knobInputGain.setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
     knobInputGain.setBounds(75, 330, 100, 100);
-//    knobInputGain.setRange(-12.f, 12.f,.01f);
     knobInputGain.setTextBoxStyle(juce::Slider::NoTextBox, false, 0, 0);
     knobInputGain.setValue(0.f);
     addAndMakeVisible(knobInputGain);
@@ -42,8 +39,6 @@ TRACKRAudioProcessorEditor::TRACKRAudioProcessorEditor (TRACKRAudioProcessor& p)
     knobLowGain.addListener(this);
     knobLowGain.setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
     knobLowGain.setBounds(257, 190, 75, 75);
-//    knobFilterHP.setRange(10.f, 1000.f,.01f);
-//	knobLowGain.setRange(-12.f, 12.f,.01);
     knobLowGain.setTextBoxStyle(juce::Slider::NoTextBox, false, 0, 0);
 //    knobFilterHP.setValue(10.f);
 	knobLowGain.setValue(0.0);
@@ -54,10 +49,7 @@ TRACKRAudioProcessorEditor::TRACKRAudioProcessorEditor (TRACKRAudioProcessor& p)
     knobHighGain.addListener(this);
 	knobHighGain.setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
     knobHighGain.setBounds(368, 190, 75, 75);
-//    knobFilterLP.setRange(1000.f, 21000.f,.01f);
-//	knobHighGain.setRange(-12.f, 12.f, .01);
     knobHighGain.setTextBoxStyle(juce::Slider::NoTextBox, false, 0, 0);
-//    knobFilterLP.setValue(21000.f);
 	knobHighGain.setValue(0.0);
     addAndMakeVisible(knobHighGain);
 	highGainAttachment = std::make_unique<AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.apvts, "HIGHGAIN",knobHighGain);
@@ -65,7 +57,6 @@ TRACKRAudioProcessorEditor::TRACKRAudioProcessorEditor (TRACKRAudioProcessor& p)
     knobFilterMidFreq.addListener(this);
 	knobFilterMidFreq.setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
     knobFilterMidFreq.setBounds(312, 265, 75, 75);
-//    knobFilterMidFreq.setRange(500.f, 2000.f);
     knobFilterMidFreq.setTextBoxStyle(juce::Slider::NoTextBox, false, 0, 0);
     knobFilterMidFreq.setValue(1000.f);
     addAndMakeVisible(knobFilterMidFreq);
@@ -74,22 +65,11 @@ TRACKRAudioProcessorEditor::TRACKRAudioProcessorEditor (TRACKRAudioProcessor& p)
     knobFilterMidGain.addListener(this);
 	knobFilterMidGain.setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
     knobFilterMidGain.setBounds(312, 385, 75, 75);
-//    knobFilterMidGain.setRange(-12.f, 12.f,.01f);
     knobFilterMidGain.setTextBoxStyle(juce::Slider::NoTextBox, false, 0, 0);
     knobFilterMidGain.setValue(0.f);
     addAndMakeVisible(knobFilterMidGain);
 	filterMidGainAttachment = std::make_unique<AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.apvts, "FILTERMIDGAIN",knobFilterMidGain);
 
-    
-    
-    // Tape Section
-//    knobBias.addListener(this);
-//    knobBias.setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
-//    knobBias.setBounds(482, 190, 75, 75);
-//    knobBias.setRange(-10.f, 10.f);
-//    knobBias.setTextBoxStyle(juce::Slider::NoTextBox, false, 0, 0);
-//    knobBias.setValue(0.f);
-//    addAndMakeVisible(knobBias);
     
     knobOutput.addListener(this);
 	knobOutput.setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
@@ -108,20 +88,8 @@ TRACKRAudioProcessorEditor::~TRACKRAudioProcessorEditor()
 //==============================================================================
 void TRACKRAudioProcessorEditor::paint (juce::Graphics& g)
 {
-    // (Our component is opaque, so we must completely fill the background with a solid colour)
-//    g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
-//    g.setColour (juce::Colours::white);
-//    g.setFont (15.0f);
-//    g.drawFittedText ("Hello World!", getLocalBounds(), juce::Justification::centred, 1);
     auto background = juce::ImageCache::getFromMemory(BinaryData::DraftGUIWoKnobs_png, BinaryData::DraftGUIWoKnobs_pngSize);
     g.drawImageAt(background, 0, 0);
-//    g.draw
-    
-//    juce::Slider knobInputGain();
-//    juce::Slider knobFilterHP();
-//    juce::Slider knobFilterLP();
-//    juce::Slider knobFilterMidFreq();
-//    juce::Slider knobFilterMidGain();
 }
 
 void TRACKRAudioProcessorEditor::resized()

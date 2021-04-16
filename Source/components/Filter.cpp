@@ -35,5 +35,4 @@ float Filter::processSample(float input, float channel, double lowGain, double h
 	float output = highPeak.processSample(y, channel);
 	
 	return output;
-	//	return output;
 }

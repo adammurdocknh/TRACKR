@@ -64,31 +64,12 @@ public:
 	Preamp preampSection;
 	Filter filterSection;
 	TapeOutput tapeSection;
-    
-	
-//	AudioParameterFloat("parameterID", "ParameterName", NormalisableRange<float>, float defaultValue, "ParameterLabel"
-	
-//    float preGain = 0.f;
-//    float inputGain = 0.f;
-//	float lowGain = 0.0f;
-//	float highGain = 0.0f;
-//    float filterMidFreq = 1000.f;
-//    float filterMidGain = 0.f;
-//    float bias = 0.f;
-//    float outputGain = 0.f;
 	
 	AudioProcessorValueTreeState apvts;
 
     
 private:
     //==============================================================================
-//    AudioParameterFloat* preGain;
-//	AudioParameterFloat* inputGain;
-//	AudioParameterFloat* lowGain;
-//	AudioParameterFloat* highGain;
-//	AudioParameterFloat* filterMidFreq;
-//	AudioParameterFloat* filterMidGain;
-//	AudioParameterFloat* outputGain;
 	
 	std::atomic<float>* preGainParameter = nullptr;
 	std::atomic<float>* inputGainParameter = nullptr;

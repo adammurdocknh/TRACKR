@@ -197,6 +197,9 @@ void TRACKRAudioProcessor::getStateInformation (juce::MemoryBlock& destData)
     // You could do that either as raw data, or use the XML or ValueTree classes
     // as intermediaries to make it easy to save and load complex data.
 //	ScopedPointer <XmlElement> xml (
+	auto state = apvts.copyState();
+	std::unique_ptr<XmlElement> xml (state.createXml());
+	copyXmlToBinary(*xml, destData);
 
 }
 
@@ -204,6 +207,10 @@ void TRACKRAudioProcessor::setStateInformation (const void* data, int sizeInByte
 {
     // You should use this method to restore your parameters from this memory block,
     // whose contents will have been created by the getStateInformation() call.
+	std::unique_ptr<XmlElement> xmlState (getXmlFromBinary(data, sizeInBytes));
+	if (xmlState.get() != nullptr)
+		if (xmlState->hasTagName (apvts.state.getType()))
+			apvts.replaceState(ValueTree::fromXml (*xmlState));
 }
 
 //==============================================================================
@@ -255,43 +262,4 @@ juce::AudioProcessorValueTreeState::ParameterLayout TRACKRAudioProcessor::create
 	
 	return { params.begin(), params.end() };
 	
-//
-//			 : apvts (*this, nullptr, Identifier ("TestTree"), {
-//				 std::make_unique<AudioParameterFloat("preGain",
-//													  "PreGain",
-//													  0.0f,
-//													  3.0f,
-//													  0.f),
-//				 std::make_unique<AudioParameterFloat("inputGain",
-//													  "InputGain",
-//													  -12.f,
-//													  12.f,
-//													  0.f),
-//				 std::make_unique<AudioParameterFloat("lowGain",
-//													  "LowGain",
-//													  -12.f,
-//													  12.f,
-//													  0.f),
-//				 std::make_unique<AudioParameterFloat("highGain",
-//													  "HighGain",
-//													  -12.f,
-//													  12.f,
-//													  0.f),
-//				 std::make_unique<AudioParameterFloat("filterMidFreq",
-//													  "FilterMidFreq",
-//													  500.f,
-//													  4000.f,
-//													  1000.f),
-//				 std::make_unique<AudioParameterFloat("filterMidGain",
-//													  "FilterMidGain",
-//													  -12.f,
-//													  12.f,
-//													  0.f),
-//				 std::make_unique<AudioParameterFloat("outputGain",
-//													  "OutputGain",
-//													  -12.f,
-//													  12.f,
-//													  0.f),
-//
-//			 }
 }

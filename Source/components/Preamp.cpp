@@ -29,9 +29,7 @@ float Preamp::processSample(float input, float volume, float drive, int channel)
 		output = atandist(output, drive);
 		output = tandist(output, drive);
 		output = cubicDist(output);
-		output = atandist(output, drive);
 		output = cubicDist(output);
-		output *= 4.f;
 		output *= juce::Decibels::decibelsToGain(12);
 		return output;
 }
@@ -44,5 +42,5 @@ float Preamp::tandist(float sample, float drive) {
 	return tanh(sample * drive);
 }
 float Preamp::cubicDist(float sample) {
-	return (sample - .1 * std::pow(sample, 3));
+	return (sample - .2 * std::pow(sample, 3));
 }

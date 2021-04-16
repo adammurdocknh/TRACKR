@@ -2,7 +2,8 @@
 
 <JUCERPROJECT id="Abpapz" name="TRACKR" projectType="audioplug" useAppConfig="0"
               jucerFormatVersion="1" pluginFormats="buildAU,buildVST3" displaySplashScreen="1"
-              pluginAUIsSandboxSafe="1" pluginManufacturer="Sentience Coding">
+              pluginAUIsSandboxSafe="1" pluginManufacturer="Sentience Coding"
+              companyName="Sentience Coding">
   <MAINGROUP id="BwW0fU" name="TRACKR">
     <GROUP id="{066738E3-083B-EC8B-8E9A-A78EFCD836BD}" name="Source">
       <GROUP id="{8BF0FF0F-3A66-9E68-31BB-310C09A1CF9E}" name="assets">
