@@ -70,11 +70,17 @@ TRACKRAudioProcessorEditor::TRACKRAudioProcessorEditor (TRACKRAudioProcessor& p)
     addAndMakeVisible(knobFilterMidGain);
 	filterMidGainAttachment = std::make_unique<AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.apvts, "FILTERMIDGAIN",knobFilterMidGain);
 
+	knobBias.addListener(this);
+	knobBias.setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
+	knobBias.setBounds(482, 190, 75, 75);
+	knobBias.setTextBoxStyle(juce::Slider::NoTextBox, false, 0, 0);
+	knobBias.setValue(1.f);
+	addAndMakeVisible(knobBias);
+	biasAttachment = std::make_unique<AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.apvts,"BIAS", knobBias);
     
     knobOutput.addListener(this);
 	knobOutput.setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
     knobOutput.setBounds(592, 190, 75, 75);
-//    knobOutput.setRange(-12.f, 12.f,.01f);
     knobOutput.setTextBoxStyle(juce::Slider::NoTextBox, false, 0, 0);
     knobOutput.setValue(0.f);
     addAndMakeVisible(knobOutput);
@@ -88,7 +94,7 @@ TRACKRAudioProcessorEditor::~TRACKRAudioProcessorEditor()
 //==============================================================================
 void TRACKRAudioProcessorEditor::paint (juce::Graphics& g)
 {
-    auto background = juce::ImageCache::getFromMemory(BinaryData::DraftGUIWoKnobs_png, BinaryData::DraftGUIWoKnobs_pngSize);
+    auto background = juce::ImageCache::getFromMemory(BinaryData::gui_png, BinaryData::gui_pngSize);
     g.drawImageAt(background, 0, 0);
 }
 

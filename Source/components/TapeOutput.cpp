@@ -12,7 +12,7 @@
 
 TapeOutput::TapeOutput(){}
 
-float TapeOutput::processSample(float input, float volume, int channel) {
+float TapeOutput::processSample(float input, float volume, float bias, int channel) {
 
 	volume = Decibels::Decibels::decibelsToGain(volume);
 	
@@ -25,18 +25,15 @@ float TapeOutput::processSample(float input, float volume, int channel) {
 	
 	highShelf.setFreq(100.0);
 	highShelf.setAmpdB(3.0);
-
-	input *= volume;
-	
-
 	
 	input = hpf.processSample(input, channel);
 	input = lowPeak.processSample(input, channel);
 	input = highShelf.processSample(input, channel);
 	input = highPeak.processSample(input, channel);
 	
-		
-	input = distStage->cubicDist(input);
+	input = distStage->atandist(input, bias);
+
+	input *= volume;
 	input *= 4.f;
 	return input;
 

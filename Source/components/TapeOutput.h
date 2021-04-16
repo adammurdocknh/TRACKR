@@ -16,7 +16,7 @@
 class TapeOutput {
 public:
 	TapeOutput();
-	float processSample(float input, float volume, int channel);
+	float processSample(float input, float volume, float bias, int channel);
 private:
 	Preamp *distStage = new Preamp();
 	Biquad highShelf = Biquad{Biquad::FilterType::HSHELF,0.7071f};

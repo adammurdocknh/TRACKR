@@ -30,6 +30,7 @@ TRACKRAudioProcessor::TRACKRAudioProcessor()
 	highGainParameter = apvts.getRawParameterValue("HIGHGAIN");
 	filterMidFreqParameter = apvts.getRawParameterValue("FILTERMIDFREQ");
 	filterMidGainParameter = apvts.getRawParameterValue("FILTERMIDGAIN");
+	biasParameter = apvts.getRawParameterValue("BIAS");
 	outputGainParameter = apvts.getRawParameterValue("OUTPUTGAIN");
 }
 
@@ -150,6 +151,7 @@ void TRACKRAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce:
 	auto highGain = apvts.getRawParameterValue("HIGHGAIN")->load();
 	auto filterMidFreq = apvts.getRawParameterValue("FILTERMIDFREQ")->load();
 	auto filterMidGain = apvts.getRawParameterValue("FILTERMIDGAIN")->load();
+	auto bias = apvts.getRawParameterValue("BIAS")->load();
 	auto outputGain = apvts.getRawParameterValue("OUTPUTGAIN")->load();
 	
 	
@@ -172,7 +174,7 @@ void TRACKRAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce:
 			input = preampSection.processSample(input, inputGain, preGain,channel);
 			input = filterSection.processSample(input, channel, lowGain, highGain, filterMidFreq, filterMidGain);
 
-			float output = tapeSection.processSample(input, outputGain, channel);
+			float output = tapeSection.processSample(input, outputGain, bias, channel);
             buffer.getWritePointer(channel)[n] =  output; // -12 dB
         }
         
@@ -253,6 +255,12 @@ juce::AudioProcessorValueTreeState::ParameterLayout TRACKRAudioProcessor::create
 														   -12.f,
 														   12.f,
 														   0.f));
+	
+	params.push_back(std::make_unique<AudioParameterFloat>("BIAS",
+														  "Bias",
+														  0.f,
+														  3.f,
+														  1.5f));
 	
 	params.push_back(std::make_unique<AudioParameterFloat>("OUTPUTGAIN",
 														   "Output Gain",

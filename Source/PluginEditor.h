@@ -37,7 +37,7 @@ private:
     juce::Slider knobHighGain;
     juce::Slider knobFilterMidFreq;
     juce::Slider knobFilterMidGain;
-//    juce::Slider knobBias;
+    juce::Slider knobBias;
     juce::Slider knobOutput;
     juce::ComboBox tapeFormulas;
 	
@@ -48,6 +48,7 @@ private:
 	std::unique_ptr<AudioProcessorValueTreeState::SliderAttachment> highGainAttachment;
 	std::unique_ptr<AudioProcessorValueTreeState::SliderAttachment> filterMidFreqAttachment;
 	std::unique_ptr<AudioProcessorValueTreeState::SliderAttachment> filterMidGainAttachment;
+	std::unique_ptr<AudioProcessorValueTreeState::SliderAttachment> biasAttachment;
 	std::unique_ptr<AudioProcessorValueTreeState::SliderAttachment> outputGainAttachment;
 
 	

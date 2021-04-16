@@ -56,10 +56,6 @@ public:
     //==============================================================================
     void getStateInformation (juce::MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
-
-    float expoDistortion (float signal, float distValue);
-    float arcTanDistortion (float signal, float alpha);
-    float getSign (float signal);
 	
 	Preamp preampSection;
 	Filter filterSection;
@@ -77,6 +73,7 @@ private:
 	std::atomic<float>* highGainParameter = nullptr;
 	std::atomic<float>* filterMidFreqParameter = nullptr;
 	std::atomic<float>* filterMidGainParameter = nullptr;
+	std::atomic<float>* biasParameter = nullptr;
 	std::atomic<float>* outputGainParameter = nullptr;
 	
 	AudioProcessorValueTreeState::ParameterLayout createParams();
